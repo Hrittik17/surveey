@@ -77,6 +77,9 @@ export async function POST(request) {
 
             })
 
+            // send the verification token to the user via emails
+            await sendMail(email, generatedVerificationToken);
+
         }
 
         // return success response

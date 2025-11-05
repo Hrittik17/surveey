@@ -13,19 +13,21 @@ export async function sendMail(email, verificationToken) {
             }
         });
 
-        // email content and structure
-        // const mailOptions = {
-        //     from: 'hrittik@gmail.com',
-        //     to: email,
-        //     subject: 'Verify your email',
-        //     html:
-        // }
-
+        // define the email options
+        const mailOptions = {
+            from: 'noreply@yourapp.com',
+            to: email,
+            subject: 'Verify your email',
+            html: `
+        <p>Welcome to our app! Please verify your email using the OTP below:</p>
+        <h2>${verificationToken}</h2>
+        <p>This OTP will expire in 1 hour.</p>
+      `,
+        };
 
         //send the email
         const mailResponse = await transporter.sendMail(mailOptions);
         return mailResponse;
-
 
     } catch (error) {
         console.error('Error sending emails:', error?.message);
