@@ -21,6 +21,17 @@ import { NextResponse } from "next/server";
 
 export async function POST(request) {
     try {
+
+        // check if the methos is POST
+        if(request.method !== "POST"){
+            return NextResponse.json({
+                message:"Only POST method is allowed",
+                success:false,
+            },{
+                status:405
+            })
+        }
+
         // connect to the database
         await connectDatabase()
 
