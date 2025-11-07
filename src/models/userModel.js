@@ -27,9 +27,7 @@ const userSchema = new Schema({
         type:Boolean,
         default:true,
     },
-    messages:{
-        ref:'Message',
-    },
+    messages:[],
     verificationToken:{
         type:String,
     },
@@ -38,6 +36,6 @@ const userSchema = new Schema({
     }
 },{timestamps:true})
 
-const userModel = mongoose.models.User || mongoose.model('User',userSchema)
+const User = mongoose.models.User || mongoose.model('User',userSchema)
 
-export default userModel;
+export default User;

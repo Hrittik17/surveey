@@ -9,6 +9,9 @@ const messageSchema = new Schema({
     content:{
         type:String,
         required:[true,'Message content is required'],
+    },
+    createdAt:{
+        type:Date,
     }
 },{timestamps:true})
 
