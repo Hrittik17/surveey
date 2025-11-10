@@ -26,6 +26,7 @@ export async function GET(request){
         // because we will use aggreration function where we strictly use objectId
         const userId = new mongoose.Types.ObjectId(user._id)
 
+        // our aggregate function
         const userMessages = await User.aggregate([
             {$match:{_id:userId}},
             {$unwind:'$messages'},

@@ -9,7 +9,7 @@
 
 
 import { connectDatabase } from "@/lib/dbConnect";
-import User from "@/models/User";
+import User from "../../../models/userModel";
 import { NextResponse } from "next/server";
 import { userNameValidation } from "@/schemas/signUpSchema";
 import {z} from "zod";
@@ -36,7 +36,7 @@ export async function GET(request){
     await connectDatabase();
 
     try{
-        // destructure search params
+        // destructure search params from the url of the request
         const {searchParams} = new URL(request.url)
         const queryParams = {
             userName:searchParams.get('userName')
