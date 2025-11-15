@@ -8,10 +8,10 @@
  */
 
 
-import { connectDatabase } from "@/lib/dbConnect";
+import { connectDatabase } from "../../../lib/dbConnect";
 import User from "../../../models/userModel";
 import { NextResponse } from "next/server";
-import { userNameValidation } from "@/schemas/signUpSchema";
+import { userNameValidation } from "../../../schemas/signUpSchema";
 import {z} from "zod";
 
 // for validating query parameters
@@ -38,6 +38,8 @@ export async function GET(request){
     try{
         // destructure search params from the url of the request
         const {searchParams} = new URL(request.url)
+        console.log('searchparams : ',searchParams)
+
         const queryParams = {
             userName:searchParams.get('userName')
         }
@@ -59,7 +61,7 @@ export async function GET(request){
         const {userName} = result?.data
 
         // check if the username already exists or not in the database
-        const isUserNameValid = await User.findOne({userName,isVerifed:true})
+        const isUserNameValid = await User.findOne({userName,isVerified:true})
 
         // if the username is already taken 
         if(isUserNameValid){

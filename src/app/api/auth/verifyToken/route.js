@@ -11,8 +11,8 @@
  */
 
 
-import { connectDatabase } from "@/lib/dbConnect";
-import User from "@/models/User";
+import { connectDatabase } from "../../../../lib/dbConnect";
+import User from "../../../../models/userModel";
 import { NextResponse } from "next/server";
 
 // a post request handler to verify the token sent to the user via email

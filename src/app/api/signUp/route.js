@@ -11,10 +11,13 @@
  */
 
 
-import { connectDatabase } from "@/lib/dbConnect";
-import User from "@/models/User";
-import bcrypt from "bcryptjs";
+import { connectDatabase } from "../../../lib/dbConnect";
+import User from "../../../models/userModel";
+// import bcrypt from "bcrypt";
+import bcrypt from 'bcryptjs'
 import { NextResponse } from "next/server";
+// import {sendMail}
+import {sendMail} from '../../../helper/mailer'
 
 
 // a function to handle the signup request by the client side
@@ -23,12 +26,12 @@ export async function POST(request) {
     try {
 
         // check if the methos is POST
-        if(request.method !== "POST"){
+        if (request.method !== "POST") {
             return NextResponse.json({
-                message:"Only POST method is allowed",
-                success:false,
-            },{
-                status:405
+                message: "Only POST method is allowed",
+                success: false,
+            }, {
+                status: 405
             })
         }
 
@@ -54,7 +57,7 @@ export async function POST(request) {
             // 
             if (isEmailAlreadyRegistered.isVerified) {
                 return NextResponse.json({
-                    mesaage: 'User is already exists with this email.',
+                    message: 'User is already exists with this email.',
                     success: false
                 }, {
                     status: 401
@@ -74,9 +77,8 @@ export async function POST(request) {
             const hashedPassword = await bcrypt.hash(password, salt);
 
             // generate verification token and expiry date
-            const expiryDate = Date.now()
-            expiryDate.setHours(expiryDate.getHours() + 1); // 1 hour expiry
-
+            const expiryDate = new Date();
+            expiryDate.setHours(expiryDate.getHours() + 1);
 
             // create a new user
             const newuser = await User.create({

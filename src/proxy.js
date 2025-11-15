@@ -34,9 +34,9 @@ export async function proxy(request) {
     }
 
     // if no token and they hit protected route
-    if (!token && url.pathName.startsWith('/dashboard')){
-        return NextResponse.redirect(new URL("/sign-in", request.url));
-    }
+    // if (!token && url.pathName.startsWith('/dashboard')){
+    //     return NextResponse.redirect(new URL("/sign-in", request.url));
+    // }
 
     // allow the request to proceed
     return NextResponse.next();
