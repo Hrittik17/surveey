@@ -23,10 +23,10 @@ export async function proxy(request) {
 
     // if token exists and the user is trying to access auth pages, redirect to dashboard
     if (token && (
-        url.pathName.startsWith('/sign-in') ||
-        url.pathName.startsWith('/signUp') ||
-        url.pathName.startsWith('/verify') ||
-        url.pathName.startsWith('/')
+        url?.pathName?.startsWith('/sign-in') ||
+        url?.pathName?.startsWith('/sign-up') ||
+        url?.pathName?.startsWith('/verify') ||
+        url?.pathName?.startsWith('/')
     )) {
 
         // redirect to dashboard
@@ -34,9 +34,9 @@ export async function proxy(request) {
     }
 
     // if no token and they hit protected route
-    // if (!token && url.pathName.startsWith('/dashboard')){
-    //     return NextResponse.redirect(new URL("/sign-in", request.url));
-    // }
+    if (!token && url?.pathName?.startsWith('/dashboard')){
+        return NextResponse.redirect(new URL("/sign-in", request.url));
+    }
 
     // allow the request to proceed
     return NextResponse.next();
@@ -46,7 +46,7 @@ export async function proxy(request) {
 export const config = {
     matcher: [
         '/sign-in',
-        '/signUp',
+        '/sign-up',
         '/verify/:path*',
         '/dashboard/:path*',
     ]

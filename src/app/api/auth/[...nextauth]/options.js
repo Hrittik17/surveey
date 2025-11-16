@@ -15,8 +15,11 @@ export const authOptions = {
       id: "credentials",
       name: "Credentials",
       credentials: {
-        username: { label: "Username", type: "text" },
+        // username: { label: "Username", type: "text" },
+        // password: { label: "Password", type: "password" },
+        identifier: { label: "Email or Username", type: "text" },
         password: { label: "Password", type: "password" },
+
       },
       // Authorize function to validate user credentials
       async authorize(credentials, req) {
@@ -62,10 +65,10 @@ export const authOptions = {
     }),
   ],
   // Callbacks to handle JWT and session
-  callbacks:{
-    async jwt({ token, user}) {
+  callbacks: {
+    async jwt({ token, user }) {
       // check if the user is available or not
-      if(user){
+      if (user) {
         // add custom fields to the token
         token._id = user._id?.toString();
         token.isVerified = user.isVerified;
@@ -75,8 +78,8 @@ export const authOptions = {
       }
       return token
     },
-    async session({ session,token }) {
-      if(token){
+    async session({ session, token }) {
+      if (token) {
         session.user._id = token._id;
         session.user.userName = token.userName;
         session.user.isVerified = token.isVerified;
@@ -87,12 +90,12 @@ export const authOptions = {
     },
   },
   // Custom pages for authentication
-  pages:{
-    signIn:'/sign-in',
+  pages: {
+    signIn: '/sign-in',
   },
   // session strategy and secret
-  session:{
-    strategy:'jwt',
+  session: {
+    strategy: 'jwt',
   },
-  secret:process.env.NEXTAUTH_SECRET
+  secret: process.env.NEXTAUTH_SECRET
 };

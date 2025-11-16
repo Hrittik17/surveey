@@ -30,7 +30,7 @@
     "**/*.mts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "src/app/layout.jsx"  ],
   "exclude": [
     "node_modules"
   ]
